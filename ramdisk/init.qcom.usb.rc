@@ -130,3 +130,17 @@ on property:sys.usb.config=diag,adb
     write /sys/class/android_usb/android0/enable 1
     start adbd
     setprop sys.usb.state ${sys.usb.config}
+
+# inform hdmi driver that boot completed
+on property:dev.bootcomplete=1
+    write /sys/devices/virtual/graphics/fb1/hdmi_boot_completed 1
+
+# external block api
+on property:sys.hdmi.block=block
+    write /sys/devices/virtual/graphics/fb1/hdmi_external_block block
+
+on property:sys.hdmi.block=unblock
+    write /sys/devices/virtual/graphics/fb1/hdmi_external_block unblock
+
+on property:sys.hdmi.block=internal_block
+    write /sys/devices/virtual/graphics/fb1/hdmi_external_block internal_block
